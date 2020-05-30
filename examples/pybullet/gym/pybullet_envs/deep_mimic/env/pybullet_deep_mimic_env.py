@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import os
 from pybullet_envs.deep_mimic.env.env import Env
 from pybullet_envs.deep_mimic.env.action_space import ActionSpace
 from pybullet_utils import bullet_client
@@ -49,9 +50,8 @@ class PyBulletDeepMimicEnv(Env):
       motion_file = self._arg_parser.parse_strings('motion_file')
       print("motion_file=", motion_file[0])
 
-      motionPath = pybullet_data.getDataPath() + "/" + motion_file[0]
-      #motionPath = pybullet_data.getDataPath()+"/motions/humanoid3d_backflip.txt"
-      self._mocapData.Load(motionPath)
+      motion_path = motion_file[0]
+      self._mocapData.Load(motion_path)
       timeStep = 1. / 240.
       useFixedBase = False
       self._humanoid = humanoid_stable_pd.HumanoidStablePD(self._pybullet_client, self._mocapData,
